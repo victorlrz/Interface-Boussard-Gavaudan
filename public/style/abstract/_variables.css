@@ -1,0 +1,15 @@
+:root {
+  --color-text: #333;
+  --rh_text-color-white: rgb(240, 244, 246);
+  --rh_text-color-black: rgb(0, 0, 0);
+  --rh_text-color-black-spec: rgb(0, 0, 0);
+  --rh_text-color-grey: rgb(121, 133, 139);
+
+  --family-font-show: "Capsule Sans Display", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --rh_font_size_32: 32px;
+  --rh_font-weight-500: 500;
+  --rh_line-height-40: 40px;
+  --rh_letter_space-33: -0.33px;
+  --rh_letter_space-01: -0.1px;
+}

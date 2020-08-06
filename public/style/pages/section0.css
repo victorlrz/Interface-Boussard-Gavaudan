@@ -1,0 +1,111 @@
+/* First header -> Ticker Name */
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+.bg-title {
+  font-size: 3rem;
+  font-family: "Staatliches", cursive;
+  font-weight: 400;
+  color: #333;
+  text-align: center;
+  padding: 1rem;
+  margin: 0.5rem;
+}
+
+.show-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  margin-top: 2rem;
+}
+
+.ticker-name {
+  max-width: 497px;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.33px;
+  line-height: 40px;
+  margin: 0;
+}
+
+/* 
+<%-# Section 1 -%>
+<section class="container-chart">
+  <header class="header-chart">
+
+  <%-# Header Graph div 1 -%>
+    <div class="h-1">
+      <h1 class="h-1-1">
+        <span class="h-1-1-s">
+          <span class="up">
+            <div class="h-1-1-s-u-d"><%= @stock.price %> <%= @stock.currency %></div>
+          </span>
+        </span>
+      </h1>
+    </div>
+
+    <%-# Header Graph span 2, 2.1 et 2.2 -%>
+    <div class="h-2">
+      <span class="h-2-s1">
+        <span>
+          <span>Today Chg: <%= @stock.price_1chg %>%</span>
+        </span>
+        <span>
+          <span>and 1yr Chg: <%= @stock.price_yrchg %></span>
+        </span>
+      </span>
+      <span class="h-2-s2">as of <%= @stock.ebitda.split("minutes, as of").last.split(".More ▼").first unless @stock.ebitda.nil? %></span>
+    </div>
+  </header>
+
+  <%-# Graph section -%>
+  <div>
+    <div class="graph-container">
+      <div class="graph-container-size" id="chart1"></div>
+      <div class="graph-container-size" id="chart2" style="display:none;"></div>
+      <div class="graph-container-size" id="chart3" style="display:none;"></div>
+      <div class="graph-container-size" id="chart4" style="display:none;"></div>
+      <div class="graph-container-size" id="chart5" style="display:none;"></div>
+      <div class="graph-container-size" id="chart6" style="display:none;"></div>
+    </div>
+  </div>
+
+  <%-# Nav section -%>
+  <nav class="nav-graph" bounds="regular">
+    <div class="nav-list">
+      <button type="button" id="1D" class="btn-nav-rbh active-border">
+        <span class="btn-nav-rbh-span-1">
+          <span class="btn-nav-rbh-pb">1D</span>
+        </span>
+      </button>
+      <button type="button" id="1W" class="btn-nav-rbh">
+        <span class="btn-nav-rbh-span-1">
+          <span class="btn-nav-rbh-pb">1W</span>
+        </span>
+      </button>
+      <button type="button" id="1M" class="btn-nav-rbh">
+        <span class="btn-nav-rbh-span-1">
+          <span class="btn-nav-rbh-pb">1M</span>
+        </span>
+      </button>
+      <button type="button" id="3M" class="btn-nav-rbh">
+        <span class="btn-nav-rbh-span-1">
+          <span class="btn-nav-rbh-pb">3M</span>
+        </span>
+      </button>
+      <button type="button" id="1Y" class="btn-nav-rbh">
+        <span class="btn-nav-rbh-span-1">
+          <span class="btn-nav-rbh-pb">1Y</span>
+        </span>
+      </button>
+      <button type="button" id="5Y" class="btn-nav-rbh">
+        <span class="btn-nav-rbh-span-1">
+          <span class="btn-nav-rbh-pb">5Y</span>
+        </span>
+      </button>
+    </div>
+  </nav>
+</section> */

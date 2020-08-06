@@ -1,0 +1,85 @@
+.ux-int {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 24px;
+}
+.action-ctn {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn {
+  -webkit-box-flex: 0;
+  flex: 0 0 auto;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.btn-ctn {
+  -webkit-box-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  fill: rgb(240, 244, 246);
+  cursor: pointer;
+  border-radius: 17px;
+  overflow: hidden;
+  padding: 0px 12px 1px;
+  border: none;
+  transition: background-color 0.2s ease-in;
+}
+
+.btn-content {
+  font-family: var(--family-font-show);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: var(--rh_letter_space_01);
+  text-decoration: unset;
+}
+
+.btn-ctn:focus {
+  outline: none;
+}
+
+.btn-ctn.red {
+  background-color: rgba(255, 80, 0, 0.2);
+}
+
+.btn-content.red {
+  color: rgb(255, 80, 0);
+}
+
+.btn-ctn.red:hover {
+  background-color: rgba(255, 80, 0, 0.4);
+}
+
+.btn-ctn.yellow {
+  background-color: rgba(255, 186, 8, 0.2);
+}
+
+.btn-ctn.yellow:hover {
+  background-color: rgba(255, 186, 8, 0.4);
+}
+
+.btn-content.yellow {
+  color: #faa307;
+}
+
+.btn-ctn.green {
+  background-color: rgba(4, 100, 126, 0.2);
+}
+
+.btn-ctn.green:hover {
+  background-color: rgba(4, 100, 126, 0.4);
+}
+
+.btn-content.green {
+  color: #04647e;
+}

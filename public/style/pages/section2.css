@@ -1,0 +1,123 @@
+/*Section 2 */
+
+.header-section {
+  margin-bottom: 12px;
+  display: block;
+}
+.container-title-section {
+  border-color: rgb(48, 54, 58);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding-bottom: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.title-section {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.title-content-h2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+}
+.title-content-span {
+  color: var(--rh_text-color-black);
+  font-family: var(--family-font-show);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: var(--rh_font-weight-500);
+  line-height: 32px;
+  -webkit-letter-spacing: var(--rh_letter_space-33);
+  -moz-letter-spacing: var(--rh_letter_space-33);
+  -ms-letter-spacing: var(--rh_letter_space-33);
+  letter-spacing: var(--rh_letter_space-33);
+  -webkit-text-decoration: unset;
+  text-decoration: unset;
+}
+
+/* Grille Data */
+.grid-ctn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.grid-element-container {
+  width: 875px;
+  display: grid;
+  grid:
+    "e1 e2 e3 e4 e5" 100px
+    "e6 e7 e8 e9 e10" 100px/
+    1fr 1fr 1fr 1fr 1fr;
+  place-items: center left;
+}
+
+.name-data {
+  font-weight: 500;
+}
+
+.mg-left {
+  margin-left: 3rem;
+}
+
+.col-mg-val-1 {
+  grid-area: e1;
+}
+
+.col-mg-val-2 {
+  grid-area: e2;
+}
+
+.col-mg-val-3 {
+  grid-area: e3;
+}
+
+.col-mg-val-4 {
+  grid-area: e4;
+}
+
+.col-mg-val-5 {
+  grid-area: e5;
+}
+
+.col-mg-val-6 {
+  grid-area: e6;
+}
+
+.col-mg-val-7 {
+  grid-area: e7;
+}
+
+.col-mg-val-8 {
+  grid-area: e8;
+}
+
+.col-mg-val-9 {
+  grid-area: e9;
+}
+
+.col-mg-val-10 {
+  grid-area: e10;
+}

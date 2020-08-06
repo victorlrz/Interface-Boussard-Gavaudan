@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="style/index.css")
+        script(src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0")
+        script(type="module" src="javascript/client/index.js")
+        link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet")
+        title Interface
+    body
+        .container
+            //- Section 0
+            //- .bg-title Boussard & Gavaudan
+            header.show-header
+                h1.ticker-name Mon ticker
+            //- Section 1
+            section.container-chart
+                header.header-chart
+                    .h-1
+                        h1.h-1-1
+                            span.h-1-1-s
+                                span.up
+                                    .h-1-1-s-u-d 32 $
+                    .h-2
+                        span.h-2-s1
+                            span
+                                span Today Chg: 1.66%
+                            span 
+                                span and 1yr Chg: -12.39%
+                        span.h-2-s2  as of Aug 04 2020 09:00 BST
+                
+                div
+                    .graph-container
+                        .graph-container-size
+                            canvas#myChart(style="position: relative; height:200px; width:100%")
+                        
+            //- Section 2
+            section
+                header.header-section
+                    .container-title-section
+                        .title-section
+                            h2.title-content-h2
+                                span.title-content-span INSTR NAME
+                .grid-ctn
+                    .grid-element-container
+                        .col-mg-val-1.mg-left
+                            .name-data QtyInBook
+                            div 450
+                        .col-mg-val-2.mg-left
+                            .name-data Last EUR
+                            div 450
+                        .col-mg-val-3.mg-left
+                            .name-data Direction
+                            div Buy
+                        .col-mg-val-4.mg-left
+                            .name-data Discretionnary Adj
+                            div Buy
+                        .col-mg-val-5.mg-left
+                            .name-data To Trade Long
+                            div Buy
+                        .col-mg-val-6.mg-left
+                            .name-data Long Move Date
+                            div Buy
+                        .col-mg-val-7.mg-left
+                            .name-data To Trade Short
+                            div Buy
+                        .col-mg-val-8.mg-left
+                            .name-data Short Move Date
+                            div Buy
+                        .col-mg-val-9.mg-left
+                            .name-data Delta
+                            div Buy
+                        .col-mg-val-10.mg-left
+                            .name-data Relative Delta
+                            div Buy
+            //- Section 3
+            section.ux-int
+                .action-ctn
+                    .action-btn
+                        button.btn-ctn.red
+                            span.btn-content.red Not Ok
+                    .action-btn
+                        button.btn-ctn.yellow
+                            span.btn-content.yellow To Check
+                    .action-btn
+                        button.btn-ctn.green
+                            span.btn-content.green Ok
+                //- Section 4
+                div.nav-ticker
+                #arrow_2.arrow-wrapper
+                    .arrow.arrow--left
+                        span Prev
+                    .block Ticker
+                    .arrow.arrow--right
+                        span Next
+   
+
+
