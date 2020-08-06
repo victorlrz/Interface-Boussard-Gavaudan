@@ -20,17 +20,17 @@ Promise.all([dataStrategy(), dataMarket()])
     let dataMarket = values[1];
     const nbrClick = dataStrategy.length - 1;
     if (arrowLeft && arrowRight && nbrClick) {
-      arrowLeft.style.setProperty("display", "none");
+      arrowLeft.style.setProperty("visibility", "hidden");
       let compt = 0;
       setDataDOM(dataStrategy, compt);
       arrowLeft.addEventListener("click", (event) => {
         if (compt !== 0) {
           compt--;
-          arrowRight.style.setProperty("display", "block");
+          arrowRight.style.setProperty("visibility", "visible");
           setDataDOM(dataStrategy, compt);
         }
         if (compt == 0) {
-          arrowLeft.style.setProperty("display", "none");
+          arrowLeft.style.setProperty("visibility", "hidden");
         }
         event.stopPropagation();
       });
@@ -38,11 +38,11 @@ Promise.all([dataStrategy(), dataMarket()])
       arrowRight.addEventListener("click", (event) => {
         if (compt < nbrClick) {
           compt++;
-          arrowLeft.style.setProperty("display", "block");
+          arrowLeft.style.setProperty("visibility", "visible");
           setDataDOM(dataStrategy, compt);
         }
         if (compt == nbrClick) {
-          arrowRight.style.setProperty("display", "none");
+          arrowRight.style.setProperty("visibility", "hidden");
         }
         event.stopPropagation();
       });
