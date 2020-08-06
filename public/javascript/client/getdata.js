@@ -9,13 +9,6 @@ const getDataMarket = async () => {
     });
     if (response.ok) {
       const dataAPI = await response.json();
-      // console.log(dataAPI); //DEBUG
-      // if (dataAPI[0]) {
-      //   displayHeadlines(dataAPI);
-      // } else {
-      //   console.log("Pas de résultats, merci d'affiner votre recherche..");
-      //   document.querySelector(".accordion").remove();
-      // }
       return dataAPI;
     }
   } catch (e) {
@@ -34,13 +27,6 @@ const getDataStrategy = async () => {
     });
     if (response.ok) {
       const dataAPI = await response.json();
-      // console.log(dataAPI); //DEBUG
-      // if (dataAPI[0]) {
-      //   displayHeadlines(dataAPI);
-      // } else {
-      //   console.log("Pas de résultats, merci d'affiner votre recherche..");
-      //   document.querySelector(".accordion").remove();
-      // }
       return dataAPI;
     }
   } catch (e) {
