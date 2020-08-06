@@ -1,7 +1,54 @@
-import { Data } from "./getdata";
+import { getDataStrategy, getDataMarket } from "./getdata.js";
+const arrowLeft = document.getElementById(".arrow arrow--left");
+const arrowRight = document.getElementById(".arrow arrow--right");
 
-const val = Data;
-console.log(val);
+const dataStrategy = async () => {
+  const dataStrt = await getDataStrategy();
+  return dataStrt;
+};
+
+const dataMarket = async () => {
+  const dataMkt = await getDataMarket();
+  return dataMkt;
+};
+
+Promise.all([dataStrategy(), dataMarket()]).then((values) => {
+  console.log(values);
+});
+
+// const nbrClick = inputStratData.length;
+// console.log(nbrClick);
+
+if (arrowLeft && arrowRight && nbrClickX) {
+  let compt = 0;
+  let click = 0;
+  arrowLeft.addEventListener("click", (event) => {
+    click -= 1;
+    arrowRight.style.setProperty("visibility", "visible");
+    if (compt !== 0) {
+      compt += lengthX;
+      transformX.style.setProperty("transform", `translateX(${compt}%)`);
+    }
+    if (click == 0) {
+      arrowLeft.style.setProperty("visibility", "hidden");
+    }
+    event.stopPropagation();
+  });
+
+  arrowRight.addEventListener("click", (event) => {
+    click += 1;
+    arrowLeft.style.setProperty("visibility", "visible");
+    if (compt > -lengthX * nbrClickX) {
+      compt -= lengthX;
+      transformX.style.setProperty("transform", `translateX(${compt}%)`);
+    }
+    if (click >= nbrClickX) {
+      arrowRight.style.setProperty("visibility", "hidden");
+    }
+    event.stopPropagation();
+  });
+}
+
 const ctx = document.getElementById("myChart").getContext("2d");
 
 let pricesDataset = [500, 50, 2424, 14040, 14141, 4111, 4544, 47, 5555, 6811];
