@@ -1,6 +1,8 @@
-import { getDataStrategy, getDataMarket } from "./getdata.js";
-const arrowLeft = document.getElementById(".arrow arrow--left");
-const arrowRight = document.getElementById(".arrow arrow--right");
+import { getDataStrategy, getDataMarket } from "./01_getdata.js";
+import { setDataDOM } from "./02_setdata.js";
+
+const arrowLeft = document.querySelector(".arrow.arrow--left");
+const arrowRight = document.querySelector(".arrow.arrow--right");
 
 const dataStrategy = async () => {
   const dataStrt = await getDataStrategy();
@@ -14,44 +16,41 @@ const dataMarket = async () => {
 
 Promise.all([dataStrategy(), dataMarket()])
   .then((values) => {
-    console.log(values);
+    let dataStrategy = values[0];
+    let dataMarket = values[1];
+    const nbrClick = dataStrategy.length - 1;
+    if (arrowLeft && arrowRight && nbrClick) {
+      arrowLeft.style.setProperty("display", "none");
+      let compt = 0;
+      setDataDOM(dataStrategy, compt);
+      arrowLeft.addEventListener("click", (event) => {
+        if (compt !== 0) {
+          compt--;
+          arrowRight.style.setProperty("display", "block");
+          setDataDOM(dataStrategy, compt);
+        }
+        if (compt == 0) {
+          arrowLeft.style.setProperty("display", "none");
+        }
+        event.stopPropagation();
+      });
+
+      arrowRight.addEventListener("click", (event) => {
+        if (compt < nbrClick) {
+          compt++;
+          arrowLeft.style.setProperty("display", "block");
+          setDataDOM(dataStrategy, compt);
+        }
+        if (compt == nbrClick) {
+          arrowRight.style.setProperty("display", "none");
+        }
+        event.stopPropagation();
+      });
+    }
   })
   .catch((reason) => {
     console.log(reason);
   });
-
-// const nbrClick = inputStratData.length;
-// console.log(nbrClick);
-
-if (arrowLeft && arrowRight && nbrClickX) {
-  let compt = 0;
-  let click = 0;
-  arrowLeft.addEventListener("click", (event) => {
-    click -= 1;
-    arrowRight.style.setProperty("visibility", "visible");
-    if (compt !== 0) {
-      compt += lengthX;
-      transformX.style.setProperty("transform", `translateX(${compt}%)`);
-    }
-    if (click == 0) {
-      arrowLeft.style.setProperty("visibility", "hidden");
-    }
-    event.stopPropagation();
-  });
-
-  arrowRight.addEventListener("click", (event) => {
-    click += 1;
-    arrowLeft.style.setProperty("visibility", "visible");
-    if (compt > -lengthX * nbrClickX) {
-      compt -= lengthX;
-      transformX.style.setProperty("transform", `translateX(${compt}%)`);
-    }
-    if (click >= nbrClickX) {
-      arrowRight.style.setProperty("visibility", "hidden");
-    }
-    event.stopPropagation();
-  });
-}
 
 const ctx = document.getElementById("myChart").getContext("2d");
 
