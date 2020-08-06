@@ -12,9 +12,13 @@ const dataMarket = async () => {
   return dataMkt;
 };
 
-Promise.all([dataStrategy(), dataMarket()]).then((values) => {
-  console.log(values);
-});
+Promise.all([dataStrategy(), dataMarket()])
+  .then((values) => {
+    console.log(values);
+  })
+  .catch((reason) => {
+    console.log(reason);
+  });
 
 // const nbrClick = inputStratData.length;
 // console.log(nbrClick);
