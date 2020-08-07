@@ -1,5 +1,6 @@
 import { getDataStrategy, getDataMarket } from "./01_getdata.js";
 import { setDataDOM } from "./02_setdata.js";
+import { getYaxisMktDataset, getXaxisMktDataset } from "./03_getchartdata.js";
 
 const arrowLeft = document.querySelector(".arrow.arrow--left");
 const arrowRight = document.querySelector(".arrow.arrow--right");
@@ -11,13 +12,19 @@ const dataStrategy = async () => {
 
 const dataMarket = async () => {
   const dataMkt = await getDataMarket();
-  return dataMkt;
+  const chartMktDatasets = [
+    getYaxisMktDataset(dataMkt),
+    getXaxisMktDataset(dataMkt),
+  ];
+
+  return chartMktDatasets;
 };
 
 Promise.all([dataStrategy(), dataMarket()])
   .then((values) => {
     let dataStrategy = values[0];
-    let dataMarket = values[1];
+    let dataMktCharts = values[1];
+    console.log(dataMktCharts);
     const nbrClick = dataStrategy.length - 1;
     if (arrowLeft && arrowRight && nbrClick) {
       arrowLeft.style.setProperty("visibility", "hidden");
