@@ -36,7 +36,8 @@ const getYaxisMktDataset = (data) => {
 const getXaxisMktDataset = (data) => {
   let dateDataset = [];
   for (let i = 0; i < data.length; i++) {
-    dateDataset.push(data[i].field1.slice(0, 10));
+    let date = data[i].field1.slice(0, 10).split("-");
+    dateDataset.push(`${date[2]}.${date[1]}.${date[0]}`);
   }
   return dateDataset;
 };

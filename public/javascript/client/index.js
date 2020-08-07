@@ -6,6 +6,8 @@ import { addData, removeData } from "./04_setdatachart.js";
 const arrowLeft = document.querySelector(".arrow.arrow--left");
 const arrowRight = document.querySelector(".arrow.arrow--right");
 const ctx = document.getElementById("myChart").getContext("2d");
+const ratio = document.querySelector(".ratio");
+const ratioDate = document.querySelector(".ratio-date");
 
 const dataStrategy = async () => {
   const dataStrt = await getDataStrategy();
@@ -55,9 +57,9 @@ Promise.all([dataStrategy(), dataMarket()])
           onHover: function (evt) {
             const item = myChart.getElementAtEvent(evt);
             if (item.length) {
-              console.log(
-                dataMktCharts[1][item[0]._index],
-                dataMktCharts[0][compt].dataset[item[0]._index]
+              hoverValues(
+                dataMktCharts[0][compt].dataset[item[0]._index],
+                dataMktCharts[1][item[0]._index]
               );
             }
           },
@@ -74,7 +76,7 @@ Promise.all([dataStrategy(), dataMarket()])
             ],
           },
           tooltips: {
-            intersect: false,
+            intersect: true,
             callbacks: {
               label: function (tooltipItem) {
                 return tooltipItem.yLabel;
@@ -118,6 +120,10 @@ Promise.all([dataStrategy(), dataMarket()])
     console.log(reason);
   });
 
+const hoverValues = (ratiovalue, datevalue) => {
+  ratio.innerHTML = ratiovalue + " ";
+  ratioDate.innerHTML = `as of ${datevalue}`;
+};
 // Chart.defaults.LineWithLine = Chart.defaults.line;
 // Chart.controllers.LineWithLine = Chart.controllers.line.extend({
 //   draw: function (ease) {
