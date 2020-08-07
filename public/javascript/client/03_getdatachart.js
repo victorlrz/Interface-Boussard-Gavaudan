@@ -25,8 +25,8 @@ const getYaxisMktDataset = (data) => {
       new marketDataset(
         bbgTickers[j] +
           "." +
-          Object.getOwnPropertyNames(data[0][bbgTickers[j]])[0],
-        marketValues //équivalent à bbgTickers + bgTickers
+          Object.getOwnPropertyNames(data[0][bbgTickers[j]])[0], //équivalent à bbgTickers + bgTickers
+        marketValues
       )
     );
   }
@@ -36,7 +36,7 @@ const getYaxisMktDataset = (data) => {
 const getXaxisMktDataset = (data) => {
   let dateDataset = [];
   for (let i = 0; i < data.length; i++) {
-    dateDataset.push(data[i].field1);
+    dateDataset.push(data[i].field1.slice(0, 10));
   }
   return dateDataset;
 };
