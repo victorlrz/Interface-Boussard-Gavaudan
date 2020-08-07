@@ -32,7 +32,6 @@ Promise.all([dataStrategy(), dataMarket()])
       arrowLeft.style.setProperty("visibility", "hidden");
       let compt = 0;
       setDataDOM(dataStrategy, compt);
-
       let myChart = new Chart(ctx, {
         type: "line",
         data: {
@@ -62,7 +61,20 @@ Promise.all([dataStrategy(), dataMarket()])
               );
             }
           },
+          scales: {
+            xAxes: [
+              {
+                ticks: {
+                  display: false,
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+          },
           tooltips: {
+            intersect: false,
             callbacks: {
               label: function (tooltipItem) {
                 return tooltipItem.yLabel;
@@ -79,7 +91,6 @@ Promise.all([dataStrategy(), dataMarket()])
           compt--;
           arrowRight.style.setProperty("visibility", "visible");
           setDataDOM(dataStrategy, compt);
-
           removeData(myChart);
           addData(myChart, dataMktCharts[1], dataMktCharts[0][compt].dataset);
         }
@@ -88,7 +99,6 @@ Promise.all([dataStrategy(), dataMarket()])
         }
         event.stopPropagation();
       });
-
       arrowRight.addEventListener("click", (event) => {
         if (compt < nbrClick) {
           compt++;
@@ -107,3 +117,80 @@ Promise.all([dataStrategy(), dataMarket()])
   .catch((reason) => {
     console.log(reason);
   });
+
+// Chart.defaults.LineWithLine = Chart.defaults.line;
+// Chart.controllers.LineWithLine = Chart.controllers.line.extend({
+//   draw: function (ease) {
+//     Chart.controllers.line.prototype.draw.call(this, ease);
+
+//     if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
+//       var activePoint = this.chart.tooltip._active[0],
+//         ctx = this.chart.ctx,
+//         x = activePoint.tooltipPosition().x,
+//         topY = this.chart.legend.bottom,
+//         bottomY = this.chart.chartArea.bottom;
+
+//       // draw line
+//       ctx.save();
+//       ctx.beginPath();
+//       ctx.moveTo(x, topY);
+//       ctx.lineTo(x, bottomY);
+//       ctx.lineWidth = 2;
+//       ctx.strokeStyle = "#07C";
+//       ctx.stroke();
+//       ctx.restore();
+//     }
+//   },
+// });
+
+// let myChart = new Chart(ctx, {
+//   type: "LineWithLine",
+//   data: {
+//     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+//     datasets: [
+//       {
+//         label: "Statistics",
+//         data: [3, 1, 2, 5, 4, 7, 6],
+//         backgroundColor: "rgba(0, 119, 204, 0.8)",
+//         borderColor: "rgba(0, 119, 204, 0.3)",
+//         fill: false,
+//       },
+//     ],
+//   },
+//   options: {
+//     responsive: true, // Instruct chart js to respond nicely.
+//     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+//     legend: {
+//       display: false,
+//     },
+//     // onHover: function (evt) {
+//     //   const item = myChart.getElementAtEvent(evt);
+//     //   if (item.length) {
+//     //     console.log(
+//     //       dataMktCharts[1][item[0]._index],
+//     //       dataMktCharts[0][compt].dataset[item[0]._index]
+//     //     );
+//     //   }
+//     // },
+//     scales: {
+//       xAxes: [
+//         {
+//           ticks: {
+//             display: false,
+//           },
+//           gridLines: {
+//             display: false,
+//           },
+//         },
+//       ],
+//     },
+//     tooltips: {
+//       intersect: false,
+//       callbacks: {
+//         label: function (tooltipItem) {
+//           return tooltipItem.yLabel;
+//         },
+//       },
+//     },
+//   },
+// });
