@@ -2,13 +2,11 @@
 
 .container-chart {
   width: 100%;
-  margin-bottom: 16px;
   position: relative;
 }
 
 .header-chart {
   margin-bottom: 12px;
-  height: 50px;
 }
 
 .h-1 {
@@ -45,21 +43,6 @@
   position: relative;
 }
 
-.h-2-s1 {
-  color: var(--rh_text-color-black);
-  font-family: var(--family-font-show);
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px;
-  -webkit-letter-spacing: var(--rh_letter_space-01);
-  -moz-letter-spacing: var(--rh_letter_space-01);
-  -ms-letter-spacing: var(--rh_letter_space-01);
-  letter-spacing: var(--rh_letter_space-01);
-  -webkit-text-decoration: unset;
-  text-decoration: unset;
-}
-
 .h-2-s2 {
   color: var(--rh_text-color-grey);
   font-family: var(--family-font-show);
@@ -78,5 +61,5 @@
 .graph-container {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 300px;
 }

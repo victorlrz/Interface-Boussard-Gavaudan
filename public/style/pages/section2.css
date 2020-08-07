@@ -68,8 +68,8 @@
   width: 875px;
   display: grid;
   grid:
-    "e1 e2 e3 e4 e5" 100px
-    "e6 e7 e8 e9 e10" 100px/
+    "e1 e2 e3 e4 e5" 80px
+    "e6 e7 e8 e9 e10" 80px/
     1fr 1fr 1fr 1fr 1fr;
   place-items: center left;
 }
