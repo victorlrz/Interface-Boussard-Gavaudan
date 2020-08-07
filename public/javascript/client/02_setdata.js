@@ -11,13 +11,14 @@ const setDataDOM = (data, index) => {
   const shortMoveDate = document.querySelector(".shortMoveDate");
   const delta = document.querySelector(".delta");
   const relativeDelta = document.querySelector(".relativeDelta");
+  const action = document.querySelector(".title-content-span.action");
 
   data[index]["Ticker"].length == 0
     ? (tckrName.innerHTML = "—")
     : (tckrName.innerHTML = data[index]["Ticker"]);
   data[index]["INSTR NAME"].length == 0
     ? (instrName.innerHTML = "—")
-    : (instrName.innerHTML = data[index]["INSTR NAME"]);
+    : (instrName.innerHTML = `${data[index]["INSTR NAME"]} -`);
   data[index]["QtyInBook"].length == 0
     ? (qtyInBook.innerHTML = "—")
     : (qtyInBook.innerHTML = data[index]["QtyInBook"]);
@@ -48,6 +49,17 @@ const setDataDOM = (data, index) => {
   data[index]["Relative Delta"].length == 0
     ? (relativeDelta.innerHTML = "—")
     : (relativeDelta.innerHTML = data[index]["Relative Delta"]);
+  data[index].Action.length == 0
+    ? (action.innerHTML = "—")
+    : (action.innerHTML = `&nbsp${data[index].Action}`);
+
+  data[index].Action == "OK"
+    ? action.style.setProperty("color", "#04647e")
+    : data[index].Action == "NOT OK"
+    ? action.style.setProperty("color", "rgb(255, 80, 0)")
+    : data[index].Action == "TO CHECK"
+    ? action.style.setProperty("color", "#faa307")
+    : action.style.setProperty("color", "black");
 };
 
 export { setDataDOM };

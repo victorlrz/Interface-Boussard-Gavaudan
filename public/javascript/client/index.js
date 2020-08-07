@@ -2,12 +2,14 @@ import { getDataStrategy, getDataMarket } from "./01_getdata.js";
 import { setDataDOM } from "./02_setdata.js";
 import { getYaxisMktDataset, getXaxisMktDataset } from "./03_getdatachart.js";
 import { addData, removeData } from "./04_setdatachart.js";
+import { setAction } from "./05_setaction.js";
 
 const arrowLeft = document.querySelector(".arrow.arrow--left");
 const arrowRight = document.querySelector(".arrow.arrow--right");
 const ctx = document.getElementById("myChart").getContext("2d");
 const ratio = document.querySelector(".ratio");
 const ratioDate = document.querySelector(".ratio-date");
+const action = document.querySelector(".title-content-span.action");
 
 const dataStrategy = async () => {
   const dataStrt = await getDataStrategy();
@@ -34,6 +36,7 @@ Promise.all([dataStrategy(), dataMarket()])
       arrowLeft.style.setProperty("visibility", "hidden");
       let compt = 0;
       setDataDOM(dataStrategy, compt);
+
       let myChart = new Chart(ctx, {
         type: "line",
         data: {
@@ -85,8 +88,8 @@ Promise.all([dataStrategy(), dataMarket()])
           },
         },
       });
-
       removeData(myChart);
+      setAction(dataStrategy);
       addData(myChart, dataMktCharts[1], dataMktCharts[0][compt].dataset);
       arrowLeft.addEventListener("click", (event) => {
         if (compt !== 0) {
@@ -95,11 +98,14 @@ Promise.all([dataStrategy(), dataMarket()])
           setDataDOM(dataStrategy, compt);
           removeData(myChart);
           addData(myChart, dataMktCharts[1], dataMktCharts[0][compt].dataset);
+          action.dataset.value = compt;
+          ratio.innerHTML = "X,";
+          ratioDate.innerHTML = "&nbspas of Date";
+          event.stopPropagation();
         }
         if (compt == 0) {
           arrowLeft.style.setProperty("visibility", "hidden");
         }
-        event.stopPropagation();
       });
       arrowRight.addEventListener("click", (event) => {
         if (compt < nbrClick) {
@@ -108,6 +114,9 @@ Promise.all([dataStrategy(), dataMarket()])
           setDataDOM(dataStrategy, compt);
           removeData(myChart);
           addData(myChart, dataMktCharts[1], dataMktCharts[0][compt].dataset);
+          action.dataset.value = compt;
+          ratio.innerHTML = "X,";
+          ratioDate.innerHTML = "&nbspas of Date";
         }
         if (compt == nbrClick) {
           arrowRight.style.setProperty("visibility", "hidden");
