@@ -1,6 +1,8 @@
 // const path = "C:/Users/victo/Desktop/T6_Roll050820_ex_victor.csv";
 const XLSX = require("xlsx");
 const CSVToJSON = require("csvtojson");
+const fs = require("fs");
+const { Parser } = require("json2csv");
 
 // Converter XLSX to JSON
 
@@ -44,7 +46,56 @@ const csvToJson = async (csvFilePath) => {
     console.log(err);
   }
 };
+var json2csv = require("async-json2csv");
+
+const jsonTocsv = async (json) => {
+  const options = {
+    data: json,
+    fields: [
+      "Portfolio",
+      "Trade",
+      "INSTR NAME",
+      "Ticker",
+      "LatestSpecialSit",
+      "REFERENCE",
+      "Sicovam",
+      "Market",
+      "QtyInBook",
+      "TargetWght",
+      "Last EUR",
+      "AdjustedWght",
+      "AUM",
+      "Delta EUR",
+      "QtyTarget",
+      "QtyToTrade",
+      "Direction",
+      "AbsQtyToTrade",
+      "Discretionnary Adj",
+      "To Trade Long",
+      "Long Move Date",
+      "To Trade Short",
+      "Short Move Date",
+      "Delta",
+      "Relative Delta",
+      "Action",
+    ],
+    header: true,
+  };
+  try {
+    var csv = await json2csv(options);
+    console.log(csv);
+    fs.writeFile("./output/output.csv", csv, function (err, data) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log(data);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 module.exports = {
   csvToJson,
+  jsonTocsv,
 };
