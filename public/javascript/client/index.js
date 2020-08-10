@@ -35,9 +35,9 @@ Promise.all([dataStrategy(), dataMarket()])
     if (arrowLeft && arrowRight && nbrClick) {
       arrowLeft.style.setProperty("visibility", "hidden");
       let compt = 0;
-      setDataDOM(dataStrategy, compt);
 
       let myChart = new Chart(ctx, {
+        // type: "LineWithLine",
         type: "line",
         data: {
           labels: [],
@@ -79,7 +79,7 @@ Promise.all([dataStrategy(), dataMarket()])
             ],
           },
           tooltips: {
-            intersect: true,
+            // intersect: false,
             callbacks: {
               label: function (tooltipItem) {
                 return tooltipItem.yLabel;
@@ -88,16 +88,14 @@ Promise.all([dataStrategy(), dataMarket()])
           },
         },
       });
-      removeData(myChart);
+      // console.log(dataMktCharts); //Debug
       setAction(dataStrategy);
-      addData(myChart, dataMktCharts[1], dataMktCharts[0][compt].dataset);
+      setAllDatasToDOM(dataStrategy, dataMktCharts, myChart, compt);
       arrowLeft.addEventListener("click", (event) => {
         if (compt !== 0) {
           compt--;
           arrowRight.style.setProperty("visibility", "visible");
-          setDataDOM(dataStrategy, compt);
-          removeData(myChart);
-          addData(myChart, dataMktCharts[1], dataMktCharts[0][compt].dataset);
+          setAllDatasToDOM(dataStrategy, dataMktCharts, myChart, compt);
           action.dataset.value = compt;
           ratio.innerHTML = "X,";
           ratioDate.innerHTML = "&nbspas of Date";
@@ -111,9 +109,7 @@ Promise.all([dataStrategy(), dataMarket()])
         if (compt < nbrClick) {
           compt++;
           arrowLeft.style.setProperty("visibility", "visible");
-          setDataDOM(dataStrategy, compt);
-          removeData(myChart);
-          addData(myChart, dataMktCharts[1], dataMktCharts[0][compt].dataset);
+          setAllDatasToDOM(dataStrategy, dataMktCharts, myChart, compt);
           action.dataset.value = compt;
           ratio.innerHTML = "X,";
           ratioDate.innerHTML = "&nbspas of Date";
@@ -133,6 +129,27 @@ const hoverValues = (ratiovalue, datevalue) => {
   ratio.innerHTML = ratiovalue + " ";
   ratioDate.innerHTML = `as of ${datevalue}`;
 };
+
+const indexOfDataset = (dataStrt, dataMkt, index) => {
+  const splitTckrName = dataStrt[index]["Ticker"].split(" ");
+  const tickerName = `${splitTckrName[0]}.${splitTckrName[1]}`;
+  for (let i = 0; i < dataMkt.length; i++) {
+    if (tickerName == dataMkt[i].name) {
+      return i;
+    }
+  }
+};
+
+const setAllDatasToDOM = (dataStrt, dataMkt, chart, index) => {
+  setDataDOM(dataStrt, index);
+  removeData(chart);
+  addData(
+    chart,
+    dataMkt[1],
+    dataMkt[0][indexOfDataset(dataStrt, dataMkt[0], index)].dataset
+  );
+};
+
 // Chart.defaults.LineWithLine = Chart.defaults.line;
 // Chart.controllers.LineWithLine = Chart.controllers.line.extend({
 //   draw: function (ease) {
@@ -155,57 +172,5 @@ const hoverValues = (ratiovalue, datevalue) => {
 //       ctx.stroke();
 //       ctx.restore();
 //     }
-//   },
-// });
-
-// let myChart = new Chart(ctx, {
-//   type: "LineWithLine",
-//   data: {
-//     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-//     datasets: [
-//       {
-//         label: "Statistics",
-//         data: [3, 1, 2, 5, 4, 7, 6],
-//         backgroundColor: "rgba(0, 119, 204, 0.8)",
-//         borderColor: "rgba(0, 119, 204, 0.3)",
-//         fill: false,
-//       },
-//     ],
-//   },
-//   options: {
-//     responsive: true, // Instruct chart js to respond nicely.
-//     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
-//     legend: {
-//       display: false,
-//     },
-//     // onHover: function (evt) {
-//     //   const item = myChart.getElementAtEvent(evt);
-//     //   if (item.length) {
-//     //     console.log(
-//     //       dataMktCharts[1][item[0]._index],
-//     //       dataMktCharts[0][compt].dataset[item[0]._index]
-//     //     );
-//     //   }
-//     // },
-//     scales: {
-//       xAxes: [
-//         {
-//           ticks: {
-//             display: false,
-//           },
-//           gridLines: {
-//             display: false,
-//           },
-//         },
-//       ],
-//     },
-//     tooltips: {
-//       intersect: false,
-//       callbacks: {
-//         label: function (tooltipItem) {
-//           return tooltipItem.yLabel;
-//         },
-//       },
-//     },
 //   },
 // });
