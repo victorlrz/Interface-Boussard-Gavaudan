@@ -30,6 +30,7 @@ Promise.all([dataStrategy(), dataMarket()])
   .then((values) => {
     let dataStrategy = values[0];
     let dataMktCharts = values[1];
+    // console.log(dataStrategy); //DEBUG
     // console.log(dataMktCharts); //DEBUG
     const nbrClick = dataStrategy.length - 1;
     if (arrowLeft && arrowRight && nbrClick) {

@@ -84,7 +84,20 @@ const jsonTocsv = async (json) => {
   try {
     var csv = await json2csv(options);
     console.log(csv);
-    fs.writeFile("./output/output.csv", csv, function (err, data) {
+    const d = new Date();
+    const date =
+      d.getFullYear() +
+      "-" +
+      (d.getMonth() + 1) +
+      "-" +
+      d.getDate() +
+      "-" +
+      d.getHours() +
+      "-" +
+      d.getMinutes() +
+      "-" +
+      d.getSeconds();
+    fs.writeFile(`./output/output_${date}.csv`, csv, function (err, data) {
       if (err) {
         return console.log(err);
       }

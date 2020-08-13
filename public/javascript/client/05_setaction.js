@@ -120,6 +120,7 @@ const downloadData = (data) => {
     "click",
     function () {
       exportData(outputDataset(data));
+      alert("Fichier créé avec succès dans le dossier /output !");
     },
     { once: true }
   );
