@@ -71,10 +71,10 @@ Promise.all([dataStrategy(), dataMarket()])
             xAxes: [
               {
                 ticks: {
-                  display: false,
+                  display: true, //Set false to delete xAxis label
                 },
                 gridLines: {
-                  display: false,
+                  display: true, //Set false to delete grid background
                 },
               },
             ],

@@ -5,28 +5,31 @@ function marketDataset(name, dataset) {
 
 const getYaxisMktDataset = (data) => {
   try {
-    const size = Object.keys(data[0]).length - 1;
-    const bbgTickers = Object.getOwnPropertyNames(data[0]);
-    // let bgTickers = [];
-    // bgTickers.push(
-    //   bbgTickers[j] +
-    //     "." +
-    //     Object.getOwnPropertyNames(data[0][bbgTickers[j]])[0]
-    // );
-    bbgTickers.shift(); //On enlève le premier élément (field1)
-    let marketDatasets = [];
+    // console.log(data);
+    let tickers = [];
 
-    for (let j = 0; j < size; j++) {
+    for (const bbgTickers in data[0]) {
+      if (bbgTickers !== "field1") {
+        // console.log(bbgTickers, data[0][bbgTickers]); //Debug
+        // console.log(bbgTickers, bgTickers, data[0][bbgTickers][bgTickers]); //Debug
+        for (const bgTickers in data[0][bbgTickers]) {
+          tickers.push(`${bbgTickers}.${bgTickers}`);
+        }
+      }
+    }
+    let marketDatasets = [];
+    // console.log(data.length);
+    for (let j = 0; j < tickers.length; j++) {
+      const bbgTicker = tickers[j].split(".")[0];
+      const bgTicker = tickers[j].split(".")[1];
+      // console.log(bbgTicker, bgTicker); //DEBUG
       let marketValues = []; //Contient les différentes valeurs statistiques d'un bgTicker
       for (let i = 0; i < data.length; i++) {
-        marketValues.push(Object.values(data[i][bbgTickers[j]])[0]); //Les 262 valeurs du bgTicker[j]
+        marketValues.push(data[i][bbgTicker][bgTicker]); //Les 262 valeurs du bgTicker[j]
       }
-
       marketDatasets.push(
         new marketDataset(
-          bbgTickers[j] +
-            "." +
-            Object.getOwnPropertyNames(data[0][bbgTickers[j]])[0], //équivalent à bbgTickers + bgTickers
+          tickers[j], //bbgTickers + bgTickers
           marketValues
         )
       );
