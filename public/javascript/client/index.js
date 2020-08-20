@@ -1,7 +1,6 @@
 import { getDataStrategy, getDataMarket } from "./01_getdata.js";
-import { setDataDOM } from "./02_setdata.js";
+import { setAllDatasToDOM } from "./02_setdata.js";
 import { getYaxisMktDataset, getXaxisMktDataset } from "./03_getdatachart.js";
-import { addData, removeData } from "./04_setdatachart.js";
 import { setAction } from "./05_setaction.js";
 
 const arrowLeft = document.querySelector(".arrow.arrow--left");
@@ -90,9 +89,10 @@ Promise.all([dataStrategy(), dataMarket()])
         },
       });
       // console.log(dataMktCharts); //Debug
-      setAction(dataStrategy);
       setAllDatasToDOM(dataStrategy, dataMktCharts, myChart, compt);
+      setAction(dataStrategy, dataMktCharts, myChart);
       arrowLeft.addEventListener("click", (event) => {
+        compt = action.dataset.value;
         if (compt !== 0) {
           compt--;
           arrowRight.style.setProperty("visibility", "visible");
@@ -107,6 +107,7 @@ Promise.all([dataStrategy(), dataMarket()])
         }
       });
       arrowRight.addEventListener("click", (event) => {
+        compt = action.dataset.value;
         if (compt < nbrClick) {
           compt++;
           arrowLeft.style.setProperty("visibility", "visible");
@@ -130,48 +131,3 @@ const hoverValues = (ratiovalue, datevalue) => {
   ratio.innerHTML = ratiovalue + " ";
   ratioDate.innerHTML = `as of ${datevalue}`;
 };
-
-const indexOfDataset = (dataStrt, dataMkt, index) => {
-  const splitTckrName = dataStrt[index]["Ticker"].split(" ");
-  const tickerName = `${splitTckrName[0]}.${splitTckrName[1]}`;
-  for (let i = 0; i < dataMkt.length; i++) {
-    if (tickerName == dataMkt[i].name) {
-      return i;
-    }
-  }
-};
-
-const setAllDatasToDOM = (dataStrt, dataMkt, chart, index) => {
-  setDataDOM(dataStrt, index);
-  removeData(chart);
-  addData(
-    chart,
-    dataMkt[1],
-    dataMkt[0][indexOfDataset(dataStrt, dataMkt[0], index)].dataset
-  );
-};
-
-// Chart.defaults.LineWithLine = Chart.defaults.line;
-// Chart.controllers.LineWithLine = Chart.controllers.line.extend({
-//   draw: function (ease) {
-//     Chart.controllers.line.prototype.draw.call(this, ease);
-
-//     if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
-//       var activePoint = this.chart.tooltip._active[0],
-//         ctx = this.chart.ctx,
-//         x = activePoint.tooltipPosition().x,
-//         topY = this.chart.legend.bottom,
-//         bottomY = this.chart.chartArea.bottom;
-
-//       // draw line
-//       ctx.save();
-//       ctx.beginPath();
-//       ctx.moveTo(x, topY);
-//       ctx.lineTo(x, bottomY);
-//       ctx.lineWidth = 2;
-//       ctx.strokeStyle = "#07C";
-//       ctx.stroke();
-//       ctx.restore();
-//     }
-//   },
-// });

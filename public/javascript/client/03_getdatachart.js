@@ -3,16 +3,16 @@ function marketDataset(name, dataset) {
   this.dataset = dataset;
 }
 
-const getYaxisMktDataset = (data) => {
+const getYaxisMktDataset = (dataMkt) => {
   try {
     // console.log(data);
     let tickers = [];
 
-    for (const bbgTickers in data[0]) {
+    for (const bbgTickers in dataMkt[0]) {
       if (bbgTickers !== "field1") {
         // console.log(bbgTickers, data[0][bbgTickers]); //Debug
         // console.log(bbgTickers, bgTickers, data[0][bbgTickers][bgTickers]); //Debug
-        for (const bgTickers in data[0][bbgTickers]) {
+        for (const bgTickers in dataMkt[0][bbgTickers]) {
           tickers.push(`${bbgTickers}.${bgTickers}`);
         }
       }
@@ -24,8 +24,8 @@ const getYaxisMktDataset = (data) => {
       const bgTicker = tickers[j].split(".")[1];
       // console.log(bbgTicker, bgTicker); //DEBUG
       let marketValues = []; //Contient les différentes valeurs statistiques d'un bgTicker
-      for (let i = 0; i < data.length; i++) {
-        marketValues.push(data[i][bbgTicker][bgTicker]); //Les 262 valeurs du bgTicker[j]
+      for (let i = 0; i < dataMkt.length; i++) {
+        marketValues.push(dataMkt[i][bbgTicker][bgTicker]); //Les 262 valeurs du bgTicker[j]
       }
       marketDatasets.push(
         new marketDataset(
@@ -42,11 +42,11 @@ const getYaxisMktDataset = (data) => {
   }
 };
 
-const getXaxisMktDataset = (data) => {
+const getXaxisMktDataset = (dataMkt) => {
   try {
     let dateDataset = [];
-    for (let i = 0; i < data.length; i++) {
-      let date = data[i].field1.slice(0, 10).split("-");
+    for (let i = 0; i < dataMkt.length; i++) {
+      let date = dataMkt[i].field1.slice(0, 10).split("-");
       dateDataset.push(`${date[2]}.${date[1]}.${date[0]}`);
     }
     return dateDataset;

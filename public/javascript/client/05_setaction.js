@@ -1,55 +1,82 @@
+import { setAllDatasToDOM } from "./02_setdata.js";
 const action = document.querySelector(".title-content-span.action");
+const arrowLeft = document.querySelector(".arrow.arrow--left");
+const arrowRight = document.querySelector(".arrow.arrow--right");
 
-const setAction = (data) => {
+const setAction = (dataStrt, dataMkt, chart) => {
   const ok = document.querySelector(".btn-ctn.green");
   const toCheck = document.querySelector(".btn-ctn.yellow");
   const notOk = document.querySelector(".btn-ctn.red");
-
+  const nbrClick = dataStrt.length - 1;
   ok.addEventListener("click", (e) => {
+    let compt = Number(action.dataset.value);
     action.innerHTML = "&nbspOK";
     action.style.setProperty("color", "#04647e");
-    data[action.dataset.value].Action = "OK";
-    checkNbrModif(data);
+    dataStrt[compt].Action = "OK";
+    if (compt < nbrClick) {
+      compt++;
+      setAllDatasToDOM(dataStrt, dataMkt, chart, compt);
+      action.dataset.value = compt;
+      arrowLeft.style.setProperty("visibility", "visible");
+    }
+    if (compt == nbrClick) {
+      arrowRight.style.setProperty("visibility", "hidden");
+    }
+    checkNbrModif(dataStrt);
     e.stopPropagation();
-    // console.log(action.dataset.value);
-    // console.log(data[action.dataset.value]);
   });
 
   notOk.addEventListener("click", (e) => {
+    let compt = Number(action.dataset.value);
     action.innerHTML = "&nbspNOT OK";
     action.style.setProperty("color", "rgb(255, 80, 0)");
-    data[action.dataset.value].Action = "NOT OK";
-    checkNbrModif(data);
+    dataStrt[compt].Action = "NOT OK";
+    if (compt < nbrClick) {
+      compt++;
+      setAllDatasToDOM(dataStrt, dataMkt, chart, compt);
+      action.dataset.value = compt;
+      arrowLeft.style.setProperty("visibility", "visible");
+    }
+    if (compt == nbrClick) {
+      arrowRight.style.setProperty("visibility", "hidden");
+    }
+    checkNbrModif(dataStrt);
     e.stopPropagation();
-    // console.log(action.dataset.value);
-    // console.log(data[action.dataset.value]);
   });
 
   toCheck.addEventListener("click", (e) => {
+    let compt = Number(action.dataset.value);
     action.innerHTML = "&nbspTO CHECK";
     action.style.setProperty("color", "#faa307");
-    data[action.dataset.value].Action = "TO CHECK";
-    checkNbrModif(data);
+    dataStrt[action.dataset.value].Action = "TO CHECK";
+    if (compt < nbrClick) {
+      compt++;
+      setAllDatasToDOM(dataStrt, dataMkt, chart, compt);
+      action.dataset.value = compt;
+      arrowLeft.style.setProperty("visibility", "visible");
+    }
+    if (compt == nbrClick) {
+      arrowRight.style.setProperty("visibility", "hidden");
+    }
+    checkNbrModif(dataStrt);
     e.stopPropagation();
-    // console.log(action.dataset.value);
-    // console.log(data[action.dataset.value]);
   });
 };
 
-const checkNbrModif = (data) => {
+const checkNbrModif = (dataStrt) => {
   let compt = 0;
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < dataStrt.length; i++) {
     if (
-      data[i].Action === "OK" ||
-      data[i].Action === "NOT OK" ||
-      data[i].Action === "TO CHECK"
+      dataStrt[i].Action === "OK" ||
+      dataStrt[i].Action === "NOT OK" ||
+      dataStrt[i].Action === "TO CHECK"
     ) {
       compt++;
     }
   }
-  if (compt == data.length) {
+  if (compt == dataStrt.length) {
     displayDownloadButton();
-    downloadData(data);
+    downloadData(dataStrt);
   }
 };
 
@@ -58,36 +85,36 @@ const displayDownloadButton = () => {
   downloadButton.style.setProperty("visibility", "visible");
 };
 
-function outputDataset(data) {
+function outputDataset(dataStrt) {
   const outputDataset = [];
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < dataStrt.length; i++) {
     let outputDataLine = new Object();
-    outputDataLine["Portfolio"] = data[i]["Portfolio"];
-    outputDataLine["Trade"] = data[i]["Trade"];
-    outputDataLine["INSTR NAME"] = data[i]["INSTR NAME"];
-    outputDataLine["Ticker"] = data[i]["Ticker"];
-    outputDataLine["LatestSpecialSit"] = data[i]["LatestSpecialSit"];
-    outputDataLine["REFERENCE"] = data[i]["REFERENCE"];
-    outputDataLine["Sicovam"] = data[i]["Sivocam"];
-    outputDataLine["Market"] = data[i]["Market"];
-    outputDataLine["QtyInBook"] = data[i]["QtyInBook"];
-    outputDataLine["TargetWght"] = data[i]["TargetWght"];
-    outputDataLine["Last EUR"] = data[i]["Last EUR"];
-    outputDataLine["AdjustedWght"] = data[i]["AdjustedWght"];
-    outputDataLine["AUM"] = data[i]["AUM"];
-    outputDataLine["Delta EUR"] = data[i]["Delta EUR"];
-    outputDataLine["QtyTarget"] = data[i]["QtyTarget"];
-    outputDataLine["QtyToTrade"] = data[i]["QtyToTrade"];
-    outputDataLine["Direction"] = data[i]["Direction"];
-    outputDataLine["AbsQtyToTrade"] = data[i]["AbsQtyToTrade"];
-    outputDataLine["Discretionnary Adj"] = data[i]["Discretionnary Adj"];
-    outputDataLine["To Trade Long"] = data[i]["To Trade Long"];
-    outputDataLine["Long Move Date"] = data[i]["Long Move Date"];
-    outputDataLine["To Trade Short"] = data[i]["To Trade Short"];
-    outputDataLine["Short Move Date"] = data[i]["Short Move Date"];
-    outputDataLine["Delta"] = data[i]["Delta"];
-    outputDataLine["Relative Delta"] = data[i]["Relative Delta"];
-    outputDataLine["Action"] = data[i]["Action"];
+    outputDataLine["Portfolio"] = dataStrt[i]["Portfolio"];
+    outputDataLine["Trade"] = dataStrt[i]["Trade"];
+    outputDataLine["INSTR NAME"] = dataStrt[i]["INSTR NAME"];
+    outputDataLine["Ticker"] = dataStrt[i]["Ticker"];
+    outputDataLine["LatestSpecialSit"] = dataStrt[i]["LatestSpecialSit"];
+    outputDataLine["REFERENCE"] = dataStrt[i]["REFERENCE"];
+    outputDataLine["Sicovam"] = dataStrt[i]["Sivocam"];
+    outputDataLine["Market"] = dataStrt[i]["Market"];
+    outputDataLine["QtyInBook"] = dataStrt[i]["QtyInBook"];
+    outputDataLine["TargetWght"] = dataStrt[i]["TargetWght"];
+    outputDataLine["Last EUR"] = dataStrt[i]["Last EUR"];
+    outputDataLine["AdjustedWght"] = dataStrt[i]["AdjustedWght"];
+    outputDataLine["AUM"] = dataStrt[i]["AUM"];
+    outputDataLine["Delta EUR"] = dataStrt[i]["Delta EUR"];
+    outputDataLine["QtyTarget"] = dataStrt[i]["QtyTarget"];
+    outputDataLine["QtyToTrade"] = dataStrt[i]["QtyToTrade"];
+    outputDataLine["Direction"] = dataStrt[i]["Direction"];
+    outputDataLine["AbsQtyToTrade"] = dataStrt[i]["AbsQtyToTrade"];
+    outputDataLine["Discretionnary Adj"] = dataStrt[i]["Discretionnary Adj"];
+    outputDataLine["To Trade Long"] = dataStrt[i]["To Trade Long"];
+    outputDataLine["Long Move Date"] = dataStrt[i]["Long Move Date"];
+    outputDataLine["To Trade Short"] = dataStrt[i]["To Trade Short"];
+    outputDataLine["Short Move Date"] = dataStrt[i]["Short Move Date"];
+    outputDataLine["Delta"] = dataStrt[i]["Delta"];
+    outputDataLine["Relative Delta"] = dataStrt[i]["Relative Delta"];
+    outputDataLine["Action"] = dataStrt[i]["Action"];
     outputDataset.push(outputDataLine);
   }
   return outputDataset;
@@ -114,13 +141,15 @@ const exportData = async (params) => {
   }
 };
 
-const downloadData = (data) => {
+const downloadData = (dataStrt) => {
   const downloadButton = document.querySelector(".buttonDownload");
   downloadButton.addEventListener(
     "click",
-    function () {
-      exportData(outputDataset(data));
+    (event) => {
+      exportData(outputDataset(dataStrt));
       alert("Fichier créé avec succès dans le dossier /output !");
+      event.stopImmediatePropagation();
+      event.stopPropagation();
     },
     { once: true }
   );
