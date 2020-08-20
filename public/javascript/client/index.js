@@ -32,6 +32,11 @@ Promise.all([dataStrategy(), dataMarket()])
       if (a["To Trade Short"] > b["To Trade Short"]) return 1;
       return 0;
     });
+    dataStrategy = dataStrategy.sort(function compare(a, b) {
+      if (a["To Trade Long"] < b["To Trade Long"]) return -1;
+      if (a["To Trade Long"] > b["To Trade Long"]) return 1;
+      return 0;
+    });
     let dataMktCharts = values[1];
     // console.log(dataStrategy); //DEBUG
     // console.log(dataMktCharts); //DEBUG
