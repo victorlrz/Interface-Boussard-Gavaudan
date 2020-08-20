@@ -27,7 +27,11 @@ const dataMarket = async () => {
 
 Promise.all([dataStrategy(), dataMarket()])
   .then((values) => {
-    let dataStrategy = values[0];
+    let dataStrategy = values[0].sort(function compare(a, b) {
+      if (a["To Trade Short"] < b["To Trade Short"]) return -1;
+      if (a["To Trade Short"] > b["To Trade Short"]) return 1;
+      return 0;
+    });
     let dataMktCharts = values[1];
     // console.log(dataStrategy); //DEBUG
     // console.log(dataMktCharts); //DEBUG
